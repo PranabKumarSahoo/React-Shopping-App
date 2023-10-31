@@ -1,0 +1,59 @@
+.btn {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px 25px;
+    border-radius: 0px;
+    border: 0;
+    transition: all 0.3s;
+    color: #fff;
+    background-color: #ff0054;
+}
+
+.btn:hover {
+    color: #fff;
+    background-color: #ff00559b;
+}
+
+.home-img img {
+    height: 320px;
+}
+
+.overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.img-info {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.img-info h3 {
+    text-shadow: 5px 5px 25px #000;
+}
+
+.info-section .icon span {
+    position: relative;
+    color: crimson;
+    top: -10px;
+    font-size: 20px;
+}
+
+.info-section .text p {
+    font-size: 13px;
+}
