@@ -1,10 +1,13 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import React, { useState } from 'react';
+import './style.css';
 import { ShoppingHome } from "../shopping-home/shopping-home";
 import { ShoppingJewelery } from "../shopping-jewelery/shopping-jewelery";
 import { ShoppingCategory } from "../shopping-category/shopping-category";
 import { ShoppingItemDetails } from "../shopping-item-details/shopping-item-details";
-import './style.css';
-import React, { useState } from 'react';
+import { ShoppingRegister } from "../shopping-register/shopping-register";
+import { ShoppingLogin } from "../shopping-login/shopping-login";
+import { ShoppingError } from "../shopping-error/shopping-error";
 
 export function ShoppingIndex() {
 
@@ -23,7 +26,9 @@ export function ShoppingIndex() {
             <BrowserRouter>
                 <header className="d-flex justify-content-between align-items-center p-3">
                     <div>
-                        <h2>E-Shopping.</h2>
+                        <Link to="home" className="text-decoration-none text-black">
+                            <h2>E-Shopping.</h2>
+                        </Link>
                     </div>
                     <nav className="d-flex nav-links">
                         <div className="me-4">
@@ -58,12 +63,12 @@ export function ShoppingIndex() {
 
                         {isDropdownOpen && (
                             <div className="position-absolute mt-5 me-2 p-4 bg-black rounded-0 z-3">
-                                <button className="btn d-block w-100 mb-2" onClick={closeDropdown}>
+                                <Link to="login" onClick={closeDropdown} className="btn d-block w-100 mb-2 text-decoration-none text-white">
                                     Login
-                                </button>
-                                <button className="btn d-block w-100" onClick={closeDropdown}>
+                                </Link>
+                                <Link to="register" onClick={closeDropdown} className="btn d-block w-100 text-decoration-none text-white">
                                     Register
-                                </button>
+                                </Link>
                             </div>
                         )}
                     </div>
@@ -80,6 +85,9 @@ export function ShoppingIndex() {
                         <Route path="jewelery" element={<ShoppingJewelery />} />
                         <Route path="category/:categoryName" element={<ShoppingCategory />} />
                         <Route path="details/:id" element={<ShoppingItemDetails />} />
+                        <Route path="register" element={<ShoppingRegister />} />
+                        <Route path="login" element={<ShoppingLogin />} />
+                        <Route path="error" element={<ShoppingError />} />
                     </Routes>
                 </div>
             </BrowserRouter>

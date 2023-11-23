@@ -1,47 +1,69 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './shopping-home.css';
+import { useCookies } from 'react-cookie';
+import { useEffect } from 'react';
 
 export function ShoppingHome() {
+
+    const [cookies, setCookies, removeCookies] = useCookies();
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (cookies["UserId"] == undefined) {
+            navigate("/login");
+        }
+    }, []);
+
+    const SignoutClick = () => {
+        removeCookies("UserId");
+        navigate("/login");
+    }
+
     return (
         <div className="container-fluid">
-            <div className="d-flex justify-content-center align-items-center flex-wrap gap-5 mt-5 home-img">
+            <div className='d-flex align-items-center justify-content-between gap-2'>
+                <h5>Hello! {cookies["UserId"]}</h5>
+                <button onClick={SignoutClick} className='btn btn-link text-decoration-none'>Sign Out</button>
+            </div>
+            <div className="d-flex justify-content-center align-items-center flex-wrap gap-5 m-4 home-img">
                 <div className='position-relative'>
                     <div className='position-relative overflow-hidden'>
                         <img src="mClothing.jpg" className="img-fluid" />
-                        <div class="overlay"></div>
+                        <div className="overlay"></div>
                     </div>
                     <div className='img-info'>
-                        <h3 class="text-light">Men's Clothing</h3>
+                        <h3 className="text-light">Men's Clothing</h3>
                         <Link to="/category/men's clothing" className='btn'>Shop now</Link>
                     </div>
                 </div>
                 <div className='position-relative'>
                     <div className='position-relative overflow-hidden'>
                         <img src="wClothing.jpg" className="img-fluid" />
-                        <div class="overlay"></div>
+                        <div className="overlay"></div>
                     </div>
                     <div className='img-info'>
-                        <h3 class="text-light">Women's Clothing</h3>
+                        <h3 className="text-light">Women's Clothing</h3>
                         <Link to="/category/women's clothing" className='btn'>Shop now</Link>
                     </div>
                 </div>
                 <div className='position-relative'>
                     <div className='position-relative overflow-hidden'>
                         <img src="jewelery.jpg" className="img-fluid" />
-                        <div class="overlay"></div>
+                        <div className="overlay"></div>
                     </div>
                     <div className='img-info'>
-                        <h3 class="text-light">Jewelery</h3>
+                        <h3 className="text-light">Jewelery</h3>
                         <Link to="/category/jewelery" className='btn'>Shop now</Link>
                     </div>
                 </div>
                 <div className='position-relative'>
                     <div className='position-relative overflow-hidden'>
                         <img src="electronics.jpg" className="img-fluid" />
-                        <div class="overlay"></div>
+                        <div className="overlay"></div>
                     </div>
                     <div className='img-info'>
-                        <h3 class="text-light">Electronics</h3>
+                        <h3 className="text-light">Electronics</h3>
                         <Link to="/category/electronics" className='btn'>Shop now</Link>
                     </div>
                 </div>

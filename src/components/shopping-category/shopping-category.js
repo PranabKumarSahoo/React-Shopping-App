@@ -1,26 +1,45 @@
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 export function ShoppingCategory() {
 
     const params = useParams();
+    const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
+    const [cookies, setCookies, removeCookies] = useCookies();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        axios({
-            method: 'GET',
-            url: `http://fakestoreapi.com/products/category/${params.categoryName}`,
-        })
-            .then(response => {
+        const fetchData = async () => {
+            try {
+                if (cookies["UserId"] == undefined) {
+                    navigate("/login");
+                }
+
+                const response = await axios.get(`http://fakestoreapi.com/products/category/${params.categoryName}`);
                 setProducts(response.data);
-            })
-    }, [params.categoryName]);
+            } catch (error) {
+                console.error('Error in useEffect:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [cookies, navigate, params.categoryName]);
 
     return (
         <div className="container-fluid">
-            <h2>Category: {params.categoryName}</h2>
-            <div className="d-flex justify-content-center align-items-center gap-4 flex-wrap mt-4">
+            {loading && (
+                <div className="text-center mt-3">
+                    <div className="spinner-container">
+                        <div className="spinner"></div>
+                    </div>
+                </div>
+            )}
+            <div className="d-flex justify-content-center align-items-center gap-4 flex-wrap m-5">
                 {
                     products.map(product =>
                         <div className="card rounded-0 border-0 m-2 p-2">
