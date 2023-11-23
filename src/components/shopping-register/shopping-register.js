@@ -2,10 +2,36 @@ import { useFormik, Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as yup from "yup";
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 export function ShoppingRegister() {
 
     const navigate = useNavigate();
+
+    const [users, setUsers] = useState([]);
+
+    const [userError, setUserError] = useState("");
+
+    useEffect(() => {
+        axios({
+            method: "GET",
+            url: "http://127.0.0.1:5000/users"
+        })
+            .then((response) => {
+                setUsers(response.data);
+            })
+    }, []);
+
+    const VerifyUserId = (e) => {
+        for (var user of users) {
+            if (user.UserId === e.target.value) {
+                setUserError("User Name Taken - Try Another.")
+                break;
+            } else {
+                setUserError("User Name Available");
+            }
+        }
+    }
 
     return (
         <div className='container-fluid d-flex flex-column align-items-center gap-3'>
@@ -58,10 +84,11 @@ export function ShoppingRegister() {
                     <Form className='d-flex flex-column align-items-center p-5 mb-5' style={{ boxShadow: "0 0 50px rgba(0, 0, 0, 0.2)", width: "400px" }}>
                         <dl>
                             <dt>User Id</dt>
-                            <dd><Field type="text" name="UserId" className='form-control rounded-0' /></dd>
+                            <dd><Field type="text" name="UserId" onKeyUp={VerifyUserId} className='form-control rounded-0' /></dd>
                             <dd className='text-danger' style={{ fontSize: "12px", marginTop: "-5px" }}>
                                 <ErrorMessage name='UserId' />
                             </dd>
+                            <dd style={{ fontSize: "12px", marginTop: "-5px" }}>{userError}</dd>
                             <dt>User Name</dt>
                             <dd><Field type="text" name="UserName" className='form-control rounded-0' /></dd>
                             <dd className='text-danger' style={{ fontSize: "12px", marginTop: "-5px" }}>

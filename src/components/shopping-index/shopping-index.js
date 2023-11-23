@@ -8,6 +8,8 @@ import { ShoppingItemDetails } from "../shopping-item-details/shopping-item-deta
 import { ShoppingRegister } from "../shopping-register/shopping-register";
 import { ShoppingLogin } from "../shopping-login/shopping-login";
 import { ShoppingError } from "../shopping-error/shopping-error";
+import CrudIndex from "../../crud-oprations/crud-index";
+import { CrudCreate } from "../../crud-oprations/crudCreate";
 
 export function ShoppingIndex() {
 
@@ -33,6 +35,9 @@ export function ShoppingIndex() {
                     <nav className="d-flex nav-links">
                         <div className="me-4">
                             <Link to="home" className="text-decoration-none links">Home</Link>
+                        </div>
+                        <div className="me-4">
+                            <Link to="products" className="text-decoration-none links">Products</Link>
                         </div>
                         <div className="me-4">
                             <Link to="category/men's clothing" className="text-decoration-none links">Men's Clothing</Link>
@@ -88,6 +93,8 @@ export function ShoppingIndex() {
                         <Route path="register" element={<ShoppingRegister />} />
                         <Route path="login" element={<ShoppingLogin />} />
                         <Route path="error" element={<ShoppingError />} />
+                        <Route path="products" element={<CrudIndex />} />
+                        <Route path="NewProduct" element={<CrudCreate />} />
                     </Routes>
                 </div>
             </BrowserRouter>
