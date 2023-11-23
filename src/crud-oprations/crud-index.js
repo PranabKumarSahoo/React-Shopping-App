@@ -40,7 +40,7 @@ export default function CrudIndex() {
                             <tr key={product.ProductId}>
                                 <td>{product.Name}</td>
                                 <td>
-                                    <Link to="/details">
+                                    <Link to={`/cruddetails/` + product.ProductId}>
                                         <span className='bi bi-eye'></span>
                                     </Link>
                                 </td>
@@ -59,6 +59,6 @@ export default function CrudIndex() {
                     }
                 </tbody>
             </table>
-        </div>
+        </div >
     )
 }

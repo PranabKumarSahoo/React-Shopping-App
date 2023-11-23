@@ -10,6 +10,7 @@ import { ShoppingLogin } from "../shopping-login/shopping-login";
 import { ShoppingError } from "../shopping-error/shopping-error";
 import CrudIndex from "../../crud-oprations/crud-index";
 import { CrudCreate } from "../../crud-oprations/crudCreate";
+import { CrudDetails } from "../../crud-oprations/crud-details";
 
 export function ShoppingIndex() {
 
@@ -95,6 +96,7 @@ export function ShoppingIndex() {
                         <Route path="error" element={<ShoppingError />} />
                         <Route path="products" element={<CrudIndex />} />
                         <Route path="NewProduct" element={<CrudCreate />} />
+                        <Route path="cruddetails/:id" element={<CrudDetails />} />
                     </Routes>
                 </div>
             </BrowserRouter>

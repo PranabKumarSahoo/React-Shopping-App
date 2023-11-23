@@ -53,7 +53,7 @@ app.post("/addproducts", (req, res) => {
         mongoClient.connect(connectionString).then(clientObj => {
             var database = clientObj.db("shopping");
             database.collection("products").insertOne(product).then(result => {
-                console.log("Records inserted successfully.");
+                // console.log("Records inserted successfully.");
                 res.redirect("/products");
                 res.end();
             })
@@ -76,7 +76,7 @@ app.put("/updateproduct", (req, res) => {
                 }
             };
             database.collection("products").updateOne(findQuery, updateQuery).then(result => {
-                console.log("Records updated successfully.");
+                // console.log("Records updated successfully.");
                 res.redirect("/products");
                 res.end();
             })
@@ -92,7 +92,7 @@ app.delete("/deleteproduct/:id", (req, res) => {
         mongoClient.connect(connectionString).then(clientObj => {
             var database = clientObj.db("shopping");
             database.collection("products").deleteOne({ ProductId: id }).then(result => {
-                console.log("Records deleted successfully.");
+                // console.log("Records deleted successfully.");
                 res.redirect("/products");
                 res.end();
             })
@@ -127,7 +127,7 @@ app.post("/registeruser", (request, response) => {
     mongoClient.connect(connectionString).then((clientObj) => {
         var database = clientObj.db("shopping");
         database.collection("users").insertOne(user).then(result => {
-            console.log("Records inserted successfully.");
+            // console.log("Records inserted successfully.");
             response.redirect("/users");
         })
     })
