@@ -15,7 +15,18 @@ export default function CrudIndex() {
             .then(response => {
                 setProducts(response.data);
             })
-    })
+    }, []);
+
+    const DeleteClick = (e) => {
+        var flag = window.confirm("Are you sure you want to delete?");
+        if (flag === true) {
+            axios({
+                method: "delete",
+                url: `http://127.0.0.1:5000/deleteproduct/${parseInt(e.currentTarget.value)}`
+            })
+            alert("Product deleted successfully!");
+        }
+    }
 
     return (
         <div className='container-fluid'>
@@ -45,14 +56,14 @@ export default function CrudIndex() {
                                     </Link>
                                 </td>
                                 <td>
-                                    <Link to="/details">
+                                    <Link to={`/crudedit/` + product.ProductId}>
                                         <span className='bi bi-pencil'></span>
                                     </Link>
                                 </td>
                                 <td>
-                                    <Link to="/details">
+                                    <button value={product.ProductId} onClick={DeleteClick}>
                                         <span className='bi bi-trash'></span>
-                                    </Link>
+                                    </button>
                                 </td>
                             </tr>
                         )

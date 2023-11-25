@@ -18,6 +18,7 @@ app.get("/products", (req, res) => {
         mongoClient.connect(connectionString).then((clientObj) => {
             var database = clientObj.db("shopping");
             database.collection("products").find({}).toArray().then((documents) => {
+                // console.log("Records present successfully.");
                 res.send(documents);
                 res.end();
             })
@@ -63,7 +64,7 @@ app.post("/addproducts", (req, res) => {
     }
 });
 
-app.put("/updateproduct", (req, res) => {
+app.put("/updateproduct/:id", (req, res) => {
     try {
         mongoClient.connect(connectionString).then(clientObj => {
             var database = clientObj.db("shopping");
@@ -75,9 +76,10 @@ app.put("/updateproduct", (req, res) => {
                     Stock: (req.body.Stock == "true") ? true : false
                 }
             };
+            console.log(findQuery);
             database.collection("products").updateOne(findQuery, updateQuery).then(result => {
-                // console.log("Records updated successfully.");
                 res.redirect("/products");
+                // res.redirect(`/details/${findQuery.ProductId}`);
                 res.end();
             })
         })

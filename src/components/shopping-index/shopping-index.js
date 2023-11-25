@@ -11,6 +11,7 @@ import { ShoppingError } from "../shopping-error/shopping-error";
 import CrudIndex from "../../crud-oprations/crud-index";
 import { CrudCreate } from "../../crud-oprations/crudCreate";
 import { CrudDetails } from "../../crud-oprations/crud-details";
+import { CrudEdit } from "../../crud-oprations/crud-edit";
 
 export function ShoppingIndex() {
 
@@ -97,6 +98,7 @@ export function ShoppingIndex() {
                         <Route path="products" element={<CrudIndex />} />
                         <Route path="NewProduct" element={<CrudCreate />} />
                         <Route path="cruddetails/:id" element={<CrudDetails />} />
+                        <Route path="crudedit/:id" element={<CrudEdit />} />
                     </Routes>
                 </div>
             </BrowserRouter>

@@ -16,7 +16,7 @@ export function CrudDetails() {
             .then((response) => {
                 setProducts(response.data);
             })
-    }, []);
+    }, [params.id]);
 
     return (
         <div className="container-fluid">
@@ -27,7 +27,7 @@ export function CrudDetails() {
                 <dt>Price</dt>
                 <dd>{products[0].Price}</dd>
                 <dt>Stock</dt>
-                <dd>{(products[0].Stock == true) ? "Available" : "Out of Stock"}</dd>
+                <dd>{(products[0].Stock === true) ? "Available" : "Out of Stock"}</dd>
             </dl>
             <Link to="/products" className="btn">Back To Products</Link>
         </div>
