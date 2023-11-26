@@ -79,7 +79,6 @@ app.put("/updateproduct/:id", (req, res) => {
             console.log(findQuery);
             database.collection("products").updateOne(findQuery, updateQuery).then(result => {
                 res.redirect("/products");
-                // res.redirect(`/details/${findQuery.ProductId}`);
                 res.end();
             })
         })
